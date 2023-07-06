@@ -19,7 +19,7 @@ Navbar.defaultProps = {
   title: "Github Finder",
 };
 
-Navbar.protoType = {
+Navbar.ProtoType = {
   title: ProtoType.string,
 };
 
