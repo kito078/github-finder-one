@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function UserItem({ user: { login, avatar_url } }) {
   //console.log(user);
@@ -14,6 +15,9 @@ function UserItem({ user: { login, avatar_url } }) {
         </div>
         <div>
           <h2 className="card-title">{login}</h2>
+          <Link to="/" className="text-base-content text-opacity-40">
+            Visit Profile
+          </Link>
         </div>
       </div>
     </div>
