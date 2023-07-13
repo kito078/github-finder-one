@@ -1,7 +1,7 @@
 import { Children, createContext, useEffect, useReducer } from "react";
 import githubReducer from "./GithubReducer";
 // import githubReducer from "./GithubReducer";
-setUsers;
+// setUsers;
 const GithubContext = createContext();
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
@@ -15,11 +15,6 @@ export const GithubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  //search user
-  // useEffect(() => {
-  //   searchUsers();
-  // }, []);
-
   const searchUsers = async (text) => {
     setLoading();
 
@@ -32,14 +27,14 @@ export const GithubProvider = ({ children }) => {
       },
     });
 
-    const data = await response.json();
+    const { items } = await response.json();
     //setUsers(data);
     // setLoading(false);
     //console.log(data);
 
     dispatch({
       type: "GET_USERS",
-      payload: data,
+      payload: items,
     });
   };
 
