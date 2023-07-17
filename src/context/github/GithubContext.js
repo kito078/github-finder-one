@@ -55,16 +55,16 @@ export const GithubProvider = ({ children }) => {
       window.location = "/notfound";
     } else {
       const data = await response.json();
+
+      dispatch({
+        type: "GET_USER",
+        payload: data,
+      });
     }
 
     //setUsers(data);
     // setLoading(false);
     //console.log(data);
-
-    dispatch({
-      type: "GET_USER",
-      payload: data,
-    });
   };
 
   //Get Repos
@@ -76,6 +76,8 @@ export const GithubProvider = ({ children }) => {
         Authorization: `token ${GITHUB_TOKEN}`,
       },
     });
+
+    const data = await response.json();
 
     //setUsers(data);
     // setLoading(false);

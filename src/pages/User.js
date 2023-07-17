@@ -6,12 +6,13 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import RepoList from "../components/repos/RepoList";
 
 function User() {
-  const { getUser, user } = useContext(GithubContext);
+  const { getUser, user, repos, getRepos } = useContext(GithubContext);
 
   const params = useParams();
 
   useEffect(() => {
     getUser(params.login);
+    getRepos(params.login);
   }, []);
 
   const {
