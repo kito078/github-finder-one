@@ -4,7 +4,11 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import RepoList from "../components/repos/RepoList";
-import { getUser, getRepos } from "../context/github/GithubActions";
+import {
+  getUser,
+  getRepos,
+  getUserAndRepos,
+} from "../context/github/GithubActions";
 
 function User() {
   const { user, loading, repos, dispatch } = useContext(GithubContext);
@@ -20,18 +24,18 @@ function User() {
     dispatch({ type: "SET_LOADING" });
     const getUserData = async () => {
       //get user
-      const userData = await getUser(params.login);
+      const userData = await getUserAndRepos(params.login);
       dispatch({
-        type: "GET_USER",
+        type: "GET_USER_AND_REPOS",
         payload: userData,
       });
 
       //get repos
-      const getRepoData = await getRepos(params.login);
-      dispatch({
-        type: "GET_REPOS",
-        payload: getRepoData,
-      });
+      // const getRepoData = await getRepos(params.login);
+      // dispatch({
+      //   type: "GET_REPOS",
+      //   payload: getRepoData,
+      // });
     };
     getUserData();
   }, [dispatch, params.login]);
