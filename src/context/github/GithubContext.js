@@ -4,8 +4,8 @@ import githubReducer from "./GithubReducer";
 // setUsers;
 const GithubContext = createContext();
 
-const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+// const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
+// const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {
@@ -17,94 +17,96 @@ export const GithubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  //SearchUsers
-  const searchUsers = async (text) => {
-    setLoading();
+  // //SearchUsers
+  // const searchUsers = async (text) => {
+  //   setLoading();
 
-    const params = new URLSearchParams({
-      q: text,
-    });
-    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+  //   const params = new URLSearchParams({
+  //     q: text,
+  //   });
+  //   const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
+  //     headers: {
+  //       Authorization: `token ${GITHUB_TOKEN}`,
+  //     },
+  //   });
 
-    const { items } = await response.json();
-    //setUsers(data);
-    // setLoading(false);
-    //console.log(data);
+  //   const { items } = await response.json();
+  //   //setUsers(data);
+  //   // setLoading(false);
+  //   //console.log(data);
 
-    dispatch({
-      type: "GET_USERS",
-      payload: items,
-    });
-  };
+  //   dispatch({
+  //     type: "GET_USERS",
+  //     payload: items,
+  //   });
+  // };
 
-  //Single User
-  const getUser = async (login) => {
-    setLoading();
+  // //Single User
+  // const getUser = async (login) => {
+  //   setLoading();
 
-    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+  //   const response = await fetch(`${GITHUB_URL}/users/${login}`, {
+  //     headers: {
+  //       Authorization: `token ${GITHUB_TOKEN}`,
+  //     },
+  //   });
 
-    if (response.status === 404) {
-      window.location = "/notfound";
-    } else {
-      const data = await response.json();
+  //   if (response.status === 404) {
+  //     window.location = "/notfound";
+  //   } else {
+  //     const data = await response.json();
 
-      dispatch({
-        type: "GET_USER",
-        payload: data,
-      });
-    }
+  //     dispatch({
+  //       type: "GET_USER",
+  //       payload: data,
+  //     });
+  //   }
 
-    //setUsers(data);
-    // setLoading(false);
-    //console.log(data);
-  };
+  //   //setUsers(data);
+  //   // setLoading(false);
+  //   //console.log(data);
+  // };
 
-  //Get Repos
-  const getRepos = async (login) => {
-    setLoading();
+  // //Get Repos
+  // const getRepos = async (login) => {
+  //   setLoading();
 
-    const response = await fetch(`${GITHUB_URL}/users/${login}/repos`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+  //   const response = await fetch(`${GITHUB_URL}/users/${login}/repos`, {
+  //     headers: {
+  //       Authorization: `token ${GITHUB_TOKEN}`,
+  //     },
+  //   });
 
-    const data = await response.json();
+  //   const data = await response.json();
 
-    //setUsers(data);
-    // setLoading(false);
-    //console.log(data);
+  //   //setUsers(data);
+  //   // setLoading(false);
+  //   //console.log(data);
 
-    dispatch({
-      type: "GET_REPOS",
-      payload: data,
-    });
-  };
+  //   dispatch({
+  //     type: "GET_REPOS",
+  //     payload: data,
+  //   });
+  // };
 
-  const setLoading = () => {
-    dispatch({
-      type: "SET_LOADING",
-    });
-  };
+  // const setLoading = () => {
+  //   dispatch({
+  //     type: "SET_LOADING",
+  //   });
+  // };
 
   return (
     <GithubContext.Provider
       value={{
-        users: state.users,
-        user: state.user,
-        repos: state.repos,
-        loading: state.loading,
-        searchUsers,
-        getUser,
-        getRepos,
+        // users: state.users,
+        // user: state.user,
+        // repos: state.repos,
+        // loading: state.loading,
+        ...state,
+        dispatch,
+
+        // getUser,
+        // getRepos,
       }}
     >
       {children}
